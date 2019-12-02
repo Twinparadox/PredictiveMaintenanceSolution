@@ -1,0 +1,17 @@
+<body>
+  <head>
+    <title>csvRead</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="css/billboard.css">
+    <script src = "js/billboard.js"></script>
+  </head>
+  <body>
+    <script>
+		d3.csv("../data/labeled_features.csv",function(error, data){
+			if (error) throw error;
+			
+			console.log(data);
+		});
+	</script>
+  </body>
+</body>
