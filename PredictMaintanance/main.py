@@ -13,6 +13,11 @@ features_path = os.path.join("data","labeled_features.csv")
 # features.csv파일 읽어오기
 features = pd.read_csv(features_path)
 
+telemetry_path = os.path.join("data","PdM_telemetry.csv")
+telemetry = pd.read_csv(telemetry_path)
+
+
+
 # make test and training splits
 test_date = pd.to_datetime('2015-10-01 01:00:00')
 
@@ -20,8 +25,6 @@ test_date = pd.to_datetime('2015-10-01 01:00:00')
 test_X = pd.get_dummies(features.loc[pd.to_datetime(features['datetime']) > test_date].drop(['datetime','machineID','failure'], 1))
 
 app = Flask(__name__)
-
-i  = 10000
 
 # 메인 페이지 라우팅
 @app.route("/")

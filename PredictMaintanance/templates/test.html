@@ -2,80 +2,75 @@
   <head>
     <title>billboard</title>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <link rel="stylesheet" href="css/billboard.css">
-    <script src = "js/billboard.js"></script>
+	<link rel="stylesheet" href=" {{ url_for('static', filename='billboard.css') }} ">
+	<script src =" {{ url_for('static', filename='billboard.js') }} "></script>
   </head>
   <body>
     <div id="flow"></div>
   </body>
 </body>
 <script>
+var data = [
+	 [
+		 { "Occurrence time": "09:10,11", "Time taken": 2, count: '10'},
+		 { "Occurrence time": "09:10,11", "Time taken": 4, count: '10'},
+		 { "Occurrence time": "09:10,11", "Time taken": 10, count: '3'}
+	 ],
+	 [
+		 { "Occurrence time": "09:10,12", "Time taken": 2, count: '30'}
+	 ],
+	 [
+		 { "Occurrence time": "09:10,13", "Time taken": 2, count: '40'},
+		 { "Occurrence time": "09:10,13", "Time taken": 6, count: '1'}
+	 ]
+ ];
+
+ function flatten(arr) {
+	 return [].concat.apply([], arr);
+ }
+
 var chart = bb.generate({
-  data: {
-    x: "x",
-    columns: [
-	["x", "2012-12-29", "2012-12-30", "2012-12-31"],
-	["data1", 230, 300, 330],
-	["data2", 190, 230, 200],
-	["data3", 90, 130, 180]
-    ]
-  },
-  axis: {
-    x: {
-      type: "timeseries",
-      tick: {
-        format: "%m/%d"
-      }
-    }
-  },
-  bindto: "#flow"
-});
+	 data: {
+		 json: flatten(data),
+		 keys: {
+			 value: ["Time taken"],
+			 x: "Occurrence time"
+		 },
+         xFormat: "%H:%M,%S",
+		 type: "scatter"
+	 },
+	 axis: {
+		 x: {
+			 type: "timeseries",
+			 tick: {
+				 format: function(x) {
+				 	return [x.getHours(), x.getMinutes(), x.getSeconds()].join(":");
+				 }
+			 }
+		 }
+	 }
+ });
 
 setTimeout(function() {
-	chart.flow({
-		columns: [
-			["x", '2013-01-11', '2013-01-21'],
-			["data1", 500, 200],
-			["data2", 100, 300],
-			["data3", 200, 120]
-		],
-		duration: 1500,
-		done: function() {
-			chart.flow({
-				columns: [
-					["x", '2013-02-11', '2013-02-12', '2013-02-13', '2013-02-14'],
-					["data1", 200, 300, 100, 250],
-					["data2", 100, 90, 40, 120],
-					["data3", 100, 100, 300, 500]
-				],
-				length: 0,
-				duration: 1500,
-				done: function() {
-					chart.flow({
-						columns: [
-							["x", '2013-03-01', '2013-03-02'],
-							["data1", 200, 300],
-							["data2", 150, 250],
-							["data3", 100, 100]
-						],
-						length: 2,
-						duration: 1500,
-						done: function() {
-							chart.flow({
-								columns: [
-									["x", '2013-03-21', '2013-04-01'],
-									["data1", 500, 200],
-									["data2", 100, 150],
-									["data3", 200, 400]
-								],
-								to: '2013-03-01',
-								duration: 1500
-							});
-						}
-					});
-	 			}
-			});
-		},
-	});
-}, 1000);
+	 chart.flow({
+		 json: flatten([{"Occurrence time": "09:10,14", "Time taken": 5, count: '30'}]),
+         length: 2,
+		 keys: {
+			 value: ["Time taken"],
+			 x: "Occurrence time"
+		 },
+		 duration: 1000,
+         done: function() {
+	         chart.flow({
+		         json: flatten([{"Occurrence time": "09:10,15", "Time taken": 5, count: '30'}]),
+		         keys: {
+			         value: ["Time taken"],
+			         x: "Occurrence time"
+		         },
+		         duration: 1000
+	         });
+         }
+	 });
+ }, 1000);
+
 </script>
