@@ -11,7 +11,7 @@ import pandas as pd
 i = 0
 data = []
 value  = []
-with open('data/telemetry.json') as f:
+with open('data/testData/model1/telemetry_json/machineID13.json') as f:
     for line in f:
         data.append(json.loads(line))
 

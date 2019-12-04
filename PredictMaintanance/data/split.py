@@ -199,4 +199,4 @@ labeled_features.head()
 
 labeled_features.loc[labeled_features['failure'] == 'comp4'][:16]
 
-labeled_features.to_csv("labled_features.csv")
+labeled_features.to_csv("labled_features2.csv")

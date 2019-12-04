@@ -12,27 +12,29 @@ import json
 import csv
 
 # datasets/features.csv 파일경로
-features_path = os.path.join("data","labeled_features.csv") 
+machine13_path = os.path.join("data","testData","model1","features","machineID13.csv")
+machine16_path = os.path.join("data","testData","model1","features","machineID16.csv")
 # features.csv파일 읽어오기
-features = pd.read_csv(features_path)
-
-# make test and training splits
-test_date = pd.to_datetime('2015-10-01 01:00:00')
+machine13 = pd.read_csv(machine13_path)
+machine16 = pd.read_csv(machine16_path)
 
 # test데이터 가져오기
-test_X = pd.get_dummies(features.loc[pd.to_datetime(features['datetime']) > test_date].drop(['datetime','machineID','failure'], 1))
+machine13 = machine13.drop(['datetime','machineID','failure'], 1)
+machine16 = machine16.drop(['datetime','machineID','failure'], 1)
 
 
 # json 데이터를 저장할 변수
 json_list = []
-sensorData = ""
+machine13Data = ""
+machine16Data = ""
+
 # graph를 그릴 json 데이터 가져오기
-with open('data/telemetry.json') as f:
+with open('data/testData/model1/telemetry_json/machineID13.json') as f:
     for line in f:
         json_list.append(json.loads(line))
 app = Flask(__name__)
 
-i  = 10000
+i  = 0
 sensorData_List = []
 # 메인 페이지 라우팅
 @app.route("/")
@@ -48,17 +50,21 @@ def make_prediction():
     i = i + 1
     
     sensorData_List.append(json_list[i])
-    sensorData = test_X[i-1:i]
+    machine13Data = machine13[i-1:i]
+    machine16Data = machine16[i-1:i]
     
     if request.method == 'POST':
 
-        prediction = model.predict(sensorData)
+        prediction1 = model.predict(machine13Data)
+        prediction2 = model.predict(machine16Data)
         
         # 예측 값을 1차원 배열로부터 확인 가능한 문자열로 변환
-        label = str(prediction)
+        label1 = str(prediction1)
+        label2 = str(prediction2)
+        print(label1, label2)
         
         # 결과 리턴
-        return render_template('main.html', label=label)
+        return render_template('main.html', label1=label1, label2=label2)
 
 # 그래프 페이지 이동
 @app.route('/graph', methods=['POST', 'GET'])

@@ -16,9 +16,9 @@
         <div class="photos-upload-view">
             <form id="upload" action="/predict" method="POST" enctype="multipart/form-data">
                 <input type="submit" value="예측 결과">
-                {% if label %}
+                {% if label1 %}
                     <span class="result_lable">
-                        {{ label }}
+                        {{label1}} {{label2}}
                     </span>
                 {% endif %}
             </form>

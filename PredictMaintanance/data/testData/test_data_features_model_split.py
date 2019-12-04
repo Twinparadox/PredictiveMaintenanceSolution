@@ -9,7 +9,7 @@ import pandas as pd
 import json
 import csv
 
-model_num = 'model1'
+model_num = 4
 
 # datasets/features.csv 파일경로
 data_path = os.path.join("test_data_features.csv") 
@@ -22,5 +22,5 @@ model = data[data['model']==model_num]
 for num in model['machineID'].unique():
     machine = model[model['machineID']==num]
     filename = 'machineID' + str(num) + '.csv'
-    filepath = model_num + '/features/'
+    filepath = 'model' + str(model_num) + '/features/'
     machine.to_csv(filepath+filename, index=False )

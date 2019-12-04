@@ -9,7 +9,7 @@ import pandas as pd
 
 
 # datasets/features.csv 파일경로
-features_path = os.path.join("data","labeled_features.csv") 
+features_path = os.path.join("data","testData","model1","features","machineID13.csv") 
 # features.csv파일 읽어오기
 features = pd.read_csv(features_path)
 
@@ -17,17 +17,17 @@ features = pd.read_csv(features_path)
 test_date = pd.to_datetime('2015-10-01 01:00:00')
 
 # test데이터 가져오기
-test_X = pd.get_dummies(features.loc[pd.to_datetime(features['datetime']) > test_date].drop(['datetime','machineID','failure'], 1))
+test_X = features.drop(['datetime','machineID','failure'], 1)
 
 app = Flask(__name__)
 
-i  = 10000
+i  = 0
 
 # 메인 페이지 라우팅
 @app.route("/")
 @app.route("/index")
 def index():
-    return flask.render_template('index2.html')
+    return flask.render_template('main.html')
 
 
 # 데이터 예측 처리
@@ -48,7 +48,7 @@ def make_prediction():
         label = str(prediction)
         
         # 결과 리턴
-        return render_template('index2.html', label=label)
+        return render_template('main.html', label=label)
 
 
 if __name__ == '__main__':

@@ -24,7 +24,7 @@ models = []
 # split out training and test data
 train_y = features.loc[pd.to_datetime(features['datetime']) < train_date, 'failure']
 train_X = pd.get_dummies(features.loc[pd.to_datetime(features['datetime']) < train_date].drop(['datetime','machineID','failure'], 1))
-    
+
 # train and predict using the model, storing results for later
 my_model = GradientBoostingClassifier(random_state=42)
 my_model.fit(train_X, train_y)  
