@@ -21,12 +21,12 @@ app = Flask(__name__)
 @app.route('/')
 
 
-@app.route('/test')
-def test():
-    return render_template('test.html')
+@app.route('/graph')
+def graph():
+    return render_template('graph.html', update = "None", sensor = "")
 
-@app.route('/post', methods = ['POST', 'GET'])
-def post():
+@app.route('/draw', methods = ['POST', 'GET'])
+def draw():
     global i
     global value
     
@@ -35,7 +35,7 @@ def post():
     value.append(data[i])
     print(value)
     
-    return render_template('read.html', update = data[i], sensor = value, num = i)
+    return render_template('graph.html', update = data[i], sensor = value)
 
 if __name__ == '__main__':
     # Flask 서비스 스타트

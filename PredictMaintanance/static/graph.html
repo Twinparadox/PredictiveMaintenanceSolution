@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<link rel="stylesheet" href=" {{ url_for('static', filename='billboard.css') }} ">
+		<script src =" {{ url_for('static', filename='billboard.js') }} "></script>
+		<meta charset="UTF-8">
+		<title>Post</title>
+	</head>
+	<body>
+		<form action="/draw" method = "post">
+			<button>가져오기</button>
+		</form>
+		Data : {{update}}
+		<br>
+		<br>
+		<script>
+			var sensorData = {{sensor|tojson}}
+			
+			function flatten(arr) {
+				return [].concat.apply([], arr);
+			}
+			
+			var voltChart = bb.generate({
+				data: {
+					json: flatten(sensorData),
+					keys: {
+						value: ["volt"],
+						x: "datetime"
+					},
+					xFormat: "%Y-%m-%d %H:%M:%S"
+				},
+				axis: {
+					x: {
+						type: "timeseries",
+						tick: {
+							format: "%Y-%m-%d %H:%M:%S"
+						}
+					}
+				},
+				color: {
+					pattern: ["#1f77b4"]
+				}
+			});
+			
+			var rotateChart = bb.generate({
+				data: {
+					json: flatten(sensorData),
+					keys: {
+						value: ["rotate"],
+						x: "datetime"
+					},
+					xFormat: "%Y-%m-%d %H:%M:%S"
+				},
+				axis: {
+					x: {
+						type: "timeseries",
+						tick: {
+							format: "%Y-%m-%d %H:%M:%S"
+						}
+					}
+				},
+				color: {
+					pattern: ["#ffbb78"]
+				}
+			});
+			
+			var pressureChart = bb.generate({
+				data: {
+					json: flatten(sensorData),
+					keys: {
+						value: ["pressure"],
+						x: "datetime"
+					},
+					xFormat: "%Y-%m-%d %H:%M:%S"
+				},
+				axis: {
+					x: {
+						type: "timeseries",
+						tick: {
+							format: "%Y-%m-%d %H:%M:%S"
+						}
+					}
+				},
+				color: {
+					pattern: ["#d62728"]
+				}
+			});
+			
+			var vibrationChart = bb.generate({
+				data: {
+					json: flatten(sensorData),
+					keys: {
+						value: ["vibration"],
+						x: "datetime"
+					},
+					xFormat: "%Y-%m-%d %H:%M:%S"
+				},
+				axis: {
+					x: {
+						type: "timeseries",
+						tick: {
+							format: "%Y-%m-%d %H:%M:%S"
+						}
+					}
+				},
+				color: {
+					pattern: ["#bcbd22"]
+				}
+			});
+		</script>
+		
+	</body>
+</html>
