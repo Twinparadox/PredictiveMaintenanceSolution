@@ -10,7 +10,7 @@ import seaborn as sns
 telemetry
 '''
 # datasets/telemetry.csv 파일경로
-telemetry_path = os.path.join("data(original)","telemetry","telemetry.csv") 
+telemetry_path = os.path.join("../data/PdM_telemetry.csv") 
 # telemetry.csv파일 읽어오기
 telemetry = pd.read_csv(telemetry_path)
 
@@ -188,7 +188,7 @@ plt.show()
 errors
 '''
 # datasets/errors.csv 파일경로
-errors_path = os.path.join("data(original)","telemetry","errors.csv") 
+errors_path = os.path.join("../data/PdM_errors.csv") 
 # errors.csv파일 읽어오기
 errors = pd.read_csv(errors_path)
 
@@ -288,20 +288,12 @@ error_machine4.loc[error_machine4.errorID=='error3', 'errorID'] = 3
 error_machine4.loc[error_machine4.errorID=='error4', 'errorID'] = 4  
 error_machine4.loc[error_machine4.errorID=='error5', 'errorID'] = 5  
 
-# error_machine4의 시간대별 error타입 산점도 그리
-print('-------------------------machineID 4 errors-------------------------')
-error_machine4.plot(kind="scatter", x="Unnamed: 0" , y="errorID")
-plt.title('machineID 4 errors', fontsize=20)
-plt.xlabel('Date')
-plt.ylabel('errorID')
-plt.show()
-
 
 '''
 machines
 '''
 # datasets/machines.csv 파일경로
-machines_path = os.path.join("data(original)","telemetry","machines.csv") 
+machines_path = os.path.join("../data/PdM_machines.csv") 
 # machines.csv파일 읽어오기
 machines = pd.read_csv(machines_path)
 
@@ -346,13 +338,13 @@ print(machines.describe())
 print()
 
 # model == 1인 데이터를 machines_model1에 저장
-machines_model1 = machines[machines['model'] == 'model1']
+machines_model1 = machines[machines['model'] == 1]
 # model == 2인 데이터를 machines_model2에 저장
-machines_model2 = machines[machines['model'] == 'model2']
+machines_model2 = machines[machines['model'] == 2]
 # model == 3인 데이터를 machines_model3에 저장
-machines_model3 = machines[machines['model'] == 'model3']
+machines_model3 = machines[machines['model'] == 3]
 # model == 4인 데이터를 machines_model4에 저장
-machines_model4 = machines[machines['model'] == 'model4']
+machines_model4 = machines[machines['model'] == 4]
 
 print('-------------------------check null in machines-------------------------')
 sns.heatmap(machines.isnull(), cbar=False)
@@ -400,7 +392,7 @@ plt.show()
 failures
 '''
 # data/failures.csv 파일경로
-failures_path = os.path.join("data(original)","telemetry","failures.csv") 
+failures_path = os.path.join("../data/PdM_failures.csv") 
 # machines.csv파일 읽어오기
 failures = pd.read_csv(failures_path)
 
@@ -456,6 +448,93 @@ plt.ylabel('count')
 
 plt.show()
 
+'''
+maint
+'''
+# data/failures.csv 파일경로
+maint_path = os.path.join("../data/PdM_maint.csv") 
+# machines.csv파일 읽어오기
+maint = pd.read_csv(maint_path)
+
+# 데이터를 제대로 불러왔는지 확인
+# 시작부분 5개 데이터 출력
+print('-------------------------maint head-------------------------')
+print(maint.head())
+print()
+
+# 끝 부분 5개 데이터 출력
+print('-------------------------maint tail-------------------------')
+print(maint.tail())
+print()
+
+# 불러온 데이터의 정보 출력
+print('-------------------------maint info-------------------------')
+maint.info()
+print()
+
+
+print('-------------------------maint describe-------------------------')
+print(maint.describe())
+print()
+
+print('-------------------------check null in maint-------------------------')
+sns.heatmap(maint.isnull(), cbar=False)
+plt.title('check null in maint', y=1.1, fontsize=20)
+plt.show()
+
+
+
+# comp 점검 빈도 출력
+print('-------------------------comp type count-------------------------')
+plt.bar(maint['comp'].sort_values().unique(), maint['comp'].value_counts(sort=True).sort_values(ascending=False))
+plt.title('comp type count', fontsize=20)
+plt.xlabel('comp type')
+plt.ylabel('comp count')
+plt.show()
+
+# machineID == 1인 데이터를 maint_machine1에 저장
+maint_machine1 = maint[maint['machineID'] == 1]
+# machineID == 2인 데이터를 error_machine2에 저장
+maint_machine2 = maint[maint['machineID'] == 2]
+# machineID == 3인 데이터를 error_machine3에 저장
+maint_machine3 = maint[maint['machineID'] == 3]
+# machineID == 4인 데이터를 error_machine4에 저장
+maint_machine4 = maint[maint['machineID'] == 4]
+
+# maint_machine1의 comp type별 점검 빈도수 출력
+print('-------------------------machines comp type count-------------------------')
+plt.suptitle('machines comp type count', y=1.1, fontsize=20)
+plt.subplot(221)
+plt.bar(maint_machine1['comp'].sort_values().unique(), maint_machine1['comp'].value_counts(sort=False).sort_index(), color='red')
+plt.title('machine1 comp type count')
+plt.xlabel('comp type')
+plt.ylabel('comp count')
+
+# maint_machine2의 comp type별 점검 빈도수 출력
+plt.subplot(222)
+plt.bar(maint_machine2['comp'].sort_values().unique(), maint_machine2['comp'].value_counts(sort=False).sort_index(), color='green')
+plt.title('machine2 comp type count')
+plt.xlabel('comp type')
+plt.ylabel('comp count')
+
+# maint_machine3의 comp type별 점검 빈도수 출력
+plt.subplot(223)
+plt.bar(maint_machine3['comp'].sort_values().unique(), maint_machine3['comp'].value_counts(sort=False).sort_index(), color='blue')
+plt.title('machine3 comp type count')
+plt.xlabel('comp type')
+plt.ylabel('comp count')
+
+# maint_machine4의 comp type별 점검 빈도수 출력
+plt.subplot(224)
+plt.bar(maint_machine4['comp'].sort_values().unique(), maint_machine4['comp'].value_counts(sort=False).sort_index(), color='cyan')
+plt.title('machine4 comp type count')
+plt.xlabel('comp type')
+plt.ylabel('comp count')
+
+# margin자동?
+plt.tight_layout()
+# 차트 출력
+plt.show()
 
 
 
