@@ -3,10 +3,9 @@ import os #운영체제(Operating System)에서 제공하는 기능을 실행
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-from sklearn.ensemble import GradientBoostingClassifier
-import operator
-from sklearn.metrics import confusion_matrix, recall_score, accuracy_score, precision_score, fbeta_score
-import pickle
+from sklearn.svm import SVC
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
 from sklearn.externals import joblib
 
 # datasets/features.csv 파일경로
@@ -26,7 +25,10 @@ train_y = features.loc[pd.to_datetime(features['datetime']) < train_date, 'failu
 train_X = pd.get_dummies(features.loc[pd.to_datetime(features['datetime']) < train_date].drop(['datetime','machineID','failure'], 1))
 
 # train and predict using the model, storing results for later
-my_model = GradientBoostingClassifier(random_state=42, max_depth=1)
+my_model = Pipeline([
+        ('scaler', StandardScaler()),
+         ('svm_clf', SVC(kernel='rbf', degree=3, coef0=0.1, C=5))])
+
 my_model.fit(train_X, train_y)  
 # 모델 저장   
-joblib.dump(my_model, 'my_model_GradientBoosting.pkl')
+joblib.dump(my_model, 'my_model_SVC.pkl')
