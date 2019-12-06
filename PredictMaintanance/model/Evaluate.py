@@ -107,11 +107,13 @@ def Evaluate(predicted, actual, labels):
     # Compute metrics for the majority classifier
     mc_index = np.where(cm_row_sums == np.max(cm_row_sums))[0][0]
     cm_row_dist = cm_row_sums / float(np.sum(cm))
-    mc_accuracy = 0 * cm_row_dist; mc_accuracy[mc_index] = cm_row_dist[mc_index]
-    mc_recall = 0 * cm_row_dist; mc_recall[mc_index] = 1
+    mc_accuracy = 0 * cm_row_dist
+    mc_accuracy[mc_index] = cm_row_dist[mc_index]
+    mc_recall = 0 * cm_row_dist
+    mc_recall[mc_index] = 1
     mc_precision = 0 * cm_row_dist
     mc_precision[mc_index] = cm_row_dist[mc_index]
-    mc_F1 = 0 * cm_row_dist;
+    mc_F1 = 0 * cm_row_dist
     mc_F1[mc_index] = 2 * mc_precision[mc_index] / (mc_precision[mc_index] + 1)
     output.extend([mc_accuracy.tolist(), mc_recall.tolist(),
                    mc_precision.tolist(), mc_F1.tolist()])
