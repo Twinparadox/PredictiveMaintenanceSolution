@@ -56,12 +56,14 @@ print()
 
 print('-------------------------check null in telemetry-------------------------')
 sns.heatmap(telemetry.isnull(), cbar=False)
+plt.savefig('figure/telemetry/telemetry_heatmap.png', dpi=300)
 plt.show()
 
 
 print('-------------------------check outlier in telemetry-------------------------')
 telemetry.boxplot(column=['volt', 'rotate', 'pressure', 'vibration'])
 plt.title('check outlier in telemetry', y=1.1, fontsize=20)
+plt.savefig('figure/telemetry/telemetry_outlier.png', dpi=300)
 plt.show()
 
 # telemetr_machine1의 1월달의 volt, rotate, pressure, vibration 값
@@ -98,6 +100,7 @@ axes[1,1].set_xlabel('datetime')
 axes[1,1].set_ylabel('vibration')
 
 plt.tight_layout()
+plt.savefig('figure/telemetry/telemetry_machine1_sensor_data.png', dpi=300)
 plt.show()
 
 # telemetr_machine1의 1월달의 volt, rotate, pressure, vibration 값
@@ -126,6 +129,7 @@ axes[1,1].set_xlabel('vibration')
 axes[1,1].set_ylabel('count')
 
 plt.tight_layout()
+plt.savefig('figure/telemetry/telemetry_machine1_sensor_data2.png', dpi=300)
 plt.show()
 
 # telemetr_machine2의 1월달의 volt, rotate, pressure, vibration 값
@@ -157,6 +161,7 @@ axes2[1,1].set_xlabel('datetime')
 axes2[1,1].set_ylabel('vibration')
 
 plt.tight_layout()
+plt.savefig('figure/telemetry/telemetry_machine2_sensor_data.png', dpi=300)
 plt.show()
 
 print('-------------------------machine2 sensor data2-------------------------')
@@ -183,6 +188,7 @@ axes2[1,1].set_xlabel('vibration')
 axes2[1,1].set_ylabel('count')
 
 plt.tight_layout()
+plt.savefig('figure/telemetry/telemetry_machine2_sensor_data2.png', dpi=300)
 plt.show()
 '''
 errors
@@ -234,6 +240,7 @@ print()
 print('-------------------------check null in errors-------------------------')
 sns.heatmap(errors.isnull(), cbar=False)
 plt.title('check null in errors', y=1.1, fontsize=20)
+plt.savefig('figure/errors/errors_heatmap.png', dpi=300)
 plt.show()
 
 # errorID 빈도 출력
@@ -242,6 +249,7 @@ plt.bar(errors['errorID'].sort_values().unique(), errors['errorID'].value_counts
 plt.title('error type count', fontsize=20)
 plt.xlabel('error type')
 plt.ylabel('error count')
+plt.savefig('figure/errors/errors_type_count.png', dpi=300)
 plt.show()
 
 # machineID == 1인 데이터를 error_machine1에 저장
@@ -279,6 +287,7 @@ plt.ylabel('error count')
 # margin자동?
 plt.tight_layout()
 # 차트 출력
+plt.savefig('figure/errors/errors_type_count.png', dpi=300)
 plt.show()
 
 # error_machine4의 errorID값을 1, 2, 3, 4, 5로 변경
@@ -349,6 +358,7 @@ machines_model4 = machines[machines['model'] == 4]
 print('-------------------------check null in machines-------------------------')
 sns.heatmap(machines.isnull(), cbar=False)
 plt.title('check null in machines', y=1.1, fontsize=20)
+plt.savefig('figure/machines/machines_heatmap.png', dpi=300)
 plt.show()
 
 # model1의 연식과 개수
@@ -384,6 +394,7 @@ plt.ylabel('count')
 # margin자동?
 plt.tight_layout()
 # 차트 출력
+plt.savefig('figure/machines/machines_model_counts.png', dpi=300)
 plt.show()
 
 
@@ -437,6 +448,7 @@ print()
 print('-------------------------check null in failures-------------------------')
 sns.heatmap(failures.isnull(), cbar=False)
 plt.title('check null in failures', y=1.1, fontsize=20)
+plt.savefig('figure/failures/failures_heatmap.png', dpi=300)
 plt.show()
 
 # machine별 고장 횟수
@@ -445,7 +457,7 @@ plt.bar(failures['machineID'].sort_values().unique(), failures['machineID'].valu
 plt.title('machine failures count', fontsize=20)
 plt.xlabel('machineID')
 plt.ylabel('count')
-
+plt.savefig('figure/failures/failures_count.png', dpi=300)
 plt.show()
 
 '''
@@ -480,6 +492,7 @@ print()
 print('-------------------------check null in maint-------------------------')
 sns.heatmap(maint.isnull(), cbar=False)
 plt.title('check null in maint', y=1.1, fontsize=20)
+plt.savefig('figure/maint/maint_heatmap.png', dpi=300)
 plt.show()
 
 
@@ -490,6 +503,7 @@ plt.bar(maint['comp'].sort_values().unique(), maint['comp'].value_counts(sort=Tr
 plt.title('comp type count', fontsize=20)
 plt.xlabel('comp type')
 plt.ylabel('comp count')
+plt.savefig('figure/maint/maint_comp_count.png', dpi=300)
 plt.show()
 
 # machineID == 1인 데이터를 maint_machine1에 저장
@@ -503,37 +517,38 @@ maint_machine4 = maint[maint['machineID'] == 4]
 
 # maint_machine1의 comp type별 점검 빈도수 출력
 print('-------------------------machines comp type count-------------------------')
-plt.suptitle('machines comp type count', y=1.1, fontsize=20)
+plt.suptitle('machines comp maint count', y=1.1, fontsize=20)
 plt.subplot(221)
 plt.bar(maint_machine1['comp'].sort_values().unique(), maint_machine1['comp'].value_counts(sort=False).sort_index(), color='red')
-plt.title('machine1 comp type count')
+plt.title('machine1 comp count')
 plt.xlabel('comp type')
 plt.ylabel('comp count')
 
 # maint_machine2의 comp type별 점검 빈도수 출력
 plt.subplot(222)
 plt.bar(maint_machine2['comp'].sort_values().unique(), maint_machine2['comp'].value_counts(sort=False).sort_index(), color='green')
-plt.title('machine2 comp type count')
+plt.title('machine2 comp maint count')
 plt.xlabel('comp type')
 plt.ylabel('comp count')
 
 # maint_machine3의 comp type별 점검 빈도수 출력
 plt.subplot(223)
 plt.bar(maint_machine3['comp'].sort_values().unique(), maint_machine3['comp'].value_counts(sort=False).sort_index(), color='blue')
-plt.title('machine3 comp type count')
+plt.title('machine3 comp maint count')
 plt.xlabel('comp type')
 plt.ylabel('comp count')
 
 # maint_machine4의 comp type별 점검 빈도수 출력
 plt.subplot(224)
 plt.bar(maint_machine4['comp'].sort_values().unique(), maint_machine4['comp'].value_counts(sort=False).sort_index(), color='cyan')
-plt.title('machine4 comp type count')
+plt.title('machine4 comp maint count')
 plt.xlabel('comp type')
 plt.ylabel('comp count')
 
 # margin자동?
 plt.tight_layout()
 # 차트 출력
+plt.savefig('figure/maint/machines_comp_maint_count.png', dpi=300)
 plt.show()
 
 

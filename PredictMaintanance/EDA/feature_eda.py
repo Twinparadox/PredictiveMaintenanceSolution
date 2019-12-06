@@ -69,15 +69,18 @@ print()
 
 print('-------------------------check null in features-------------------------')
 sns.heatmap(features.isnull(), cbar=False)
+plt.savefig('figure/features/features_heatmap.png', dpi=300)
 plt.show()
 
 print('-------------------------check outlier in features-------------------------')
 features.boxplot(column=['voltmean_24h', 'rotatemean_24h', 'pressuremean_24h', 'vibrationmean_24h'])
 plt.title('mean data outlier', fontsize=20)
+plt.savefig('figure/features/features_mean_outlier.png', dpi=300)
 plt.show()
 
 features.boxplot(column=['voltsd_24h', 'rotatesd_24h', 'pressuresd_24h', 'vibrationsd_24h'])
 plt.title('sd data outlier', fontsize=20)
+plt.savefig('figure/features/features_sd_outlier.png', dpi=300)
 plt.show()
 
 print('-------------------------machine1 sensor data mean plot-------------------------')
@@ -112,6 +115,7 @@ axes[1,1].set_xlabel('datetime')
 axes[1,1].set_ylabel('vibration mean')
 
 plt.tight_layout()
+plt.savefig('figure/features/machine1_mean_sensor_data.png', dpi=300)
 plt.show()
 
 print('-------------------------machine1 sensor data mean histogram-------------------------')
@@ -142,6 +146,7 @@ axes[1,1].set_xlabel('datetime')
 axes[1,1].set_ylabel('vibration mean')
 
 plt.tight_layout()
+plt.savefig('figure/features/machine1_mean_sensor_data2.png', dpi=300)
 plt.show()
 
 # features_machine1의 1월달의 24시간동안 volt, rotate, pressure, vibration standard deviation값
@@ -173,6 +178,7 @@ axes[1,1].set_xlabel('datetime')
 axes[1,1].set_ylabel('vibration sd')
 
 plt.tight_layout()
+plt.savefig('figure/features/machine1_sd_sensor_data.png', dpi=300)
 plt.show()
 
 print('-------------------------machine1 sensor data standard deviation histogram-------------------------')
@@ -203,6 +209,7 @@ axes[1,1].set_xlabel('datetime')
 axes[1,1].set_ylabel('vibration sd')
 
 plt.tight_layout()
+plt.savefig('figure/features/machine1_sd_sensor_data2.png', dpi=300)
 plt.show()
 
 
@@ -237,6 +244,7 @@ plt.xlabel('age')
 plt.ylabel('maint count')
 
 plt.tight_layout()
+plt.savefig('figure/features/failures_with_age.png', dpi=300)
 plt.show()
 
 
