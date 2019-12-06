@@ -11,8 +11,8 @@
 
   <script src="https://d3js.org/d3.v4.min.js"></script>
   
-
   <link rel="stylesheet" href=" {{ url_for('static', filename='billboard.css') }} ">
+
   <script src =" {{ url_for('static', filename='billboard.js') }} "></script>
 
   <!-- Bootstrap core CSS -->
@@ -144,30 +144,19 @@
   </div>
   <!-- /.container -->
 
-  <!-- Footer -->
+  <!-- Footer
   <footer class="bg-dark navbar-fixed-bottom">
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
     </div>
-    <!-- /.container -->
   </footer>
+  -->
+
   <script>
-  $("#refreshButton").click(function() {
-    $.ajax({
-      type: "POST",
-      url: "/draw"
-    });
-  });
-
-  var sensorData = {{sensor|tojson}};
-
-  function flatten(arr) {
-    return [].concat.apply([], arr);
-  }
-			
+  sensorData = {{initdata|tojson}}
   var voltChart = bb.generate({
     data: {
-      json: flatten(sensorData),
+      json: sensorData,
       keys: {
         value: ["volt"],
         x: "datetime"
@@ -190,7 +179,7 @@
 
   var rotateChart = bb.generate({
     data: {
-      json: flatten(sensorData),
+      json: sensorData,
       keys: {
         value: ["rotate"],
         x: "datetime"
@@ -213,7 +202,7 @@
   
   var pressureChart = bb.generate({
     data: {
-      json: flatten(sensorData),
+      json: sensorData,
       keys: {
         value: ["pressure"],
         x: "datetime"
@@ -236,7 +225,7 @@
   
   var vibrationChart = bb.generate({
     data: {
-      json: flatten(sensorData),
+      json: sensorData,
       keys: {
         value: ["vibration"],
         x: "datetime"
@@ -256,6 +245,60 @@
     },
     bindto: '#lineChart4'
   });
+
+  setInterval(function () {
+    $.ajax({
+      type: "POST",
+      url: "/draw",
+      success: function(data) {
+        drawChart(data)
+      }
+    });  
+    function drawChart(data)
+    {
+
+      function flatten(arr) {
+        return [].concat.apply([], arr);
+      }
+      var data = JSON.parse(data)
+      voltChart.flow({
+        json: flatten(data),
+        keys: {
+          value: ["volt"],
+          x: "datetime"
+        },
+        xFormat: "%Y-%m-%d %H:%M:%S",
+        duration: 500,
+      });
+      rotateChart.flow({
+        json: flatten(data),
+        keys: {
+          value: ["rotate"],
+          x: "datetime"
+        },
+        xFormat: "%Y-%m-%d %H:%M:%S",
+        duration: 500,
+      })
+      pressureChart.flow({
+        json: flatten(data),
+        keys: {
+          value: ["pressure"],
+          x: "datetime"
+        },
+        xFormat: "%Y-%m-%d %H:%M:%S",
+        duration: 500,
+      })
+      vibrationChart.flow({
+        json: flatten(data),
+        keys: {
+          value: ["vibration"],
+          x: "datetime"
+        },
+        xFormat: "%Y-%m-%d %H:%M:%S",
+        duration: 500,
+      })
+    }
+  }, 2000);
   
 </script>
 </body>
