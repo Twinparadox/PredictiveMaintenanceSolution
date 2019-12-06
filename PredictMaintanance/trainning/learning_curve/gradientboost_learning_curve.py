@@ -21,7 +21,7 @@ from sklearn.naive_bayes import GaussianNB
 
 
 # datasets/features.csv 파일경로
-features_path = os.path.join("../data/labeled_features.csv") 
+features_path = os.path.join("../../data/labeled_features.csv") 
 # features.csv파일 읽어오기
 features = pd.read_csv(features_path)
 
@@ -136,7 +136,7 @@ plt.fill_between(param_range,
 plt.grid()
 plt.xscale('log')
 plt.legend(loc='lower right')
-plt.xlabel('Parameter C')
+plt.xlabel('Parameter max_depth')
 plt.ylabel('Accuracy')
 plt.ylim([0.8, 1.0])
 plt.tight_layout()

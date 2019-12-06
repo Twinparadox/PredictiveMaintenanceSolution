@@ -26,14 +26,14 @@ validation_date = pd.to_datetime('2015-8-01 01:00:00')
 test_result = pd.DataFrame(test_result.loc[pd.to_datetime(features['datetime']) > validation_date])
 validation_data = validation_data.loc[pd.to_datetime(features['datetime']) > validation_date]
 
-my_model = joblib.load('my_model_RandomForestClassifier.pkl')
+my_model = joblib.load('my_model_LinearSVC.pkl')
 
 
 
 test_result['predicted_failure'] = my_model.predict(validation_data)
 test_results.append(test_result)
 models.append(my_model)
-
+'''
 sns.set_style("darkgrid")
 plt.figure(figsize=(10, 6))
 labels, importances = zip(*sorted(zip(validation_data.columns, models[0].feature_importances_),
@@ -44,9 +44,9 @@ _, labels = plt.xticks()
 plt.setp(labels, rotation=90)
 plt.bar(range(len(importances)), importances)
 plt.ylabel('Importance')
-plt.savefig('RandomForestClassifier_importance_feature.png', dpi=300)
+plt.savefig('LinearSVC_importance_feature.png', dpi=300)
 plt.show()
-
+'''
 def Evaluate(predicted, actual, labels):
     output_labels = []
     output = []
@@ -166,7 +166,7 @@ for i, test_result in enumerate(test_results):
                                  labels = ['none', 'comp1', 'comp2', 'comp3', 'comp4'])
     evaluation_results.append(evaluation_result)
     
-f = open('RandomForestClassifier_evaluate.txt','w')
+f = open('LinearSVC_evaluate.txt','w')
 pd.set_option('display.max_columns', 100)
 print(evaluation_results[0], file=f)  # show full results for first split only
 f.close()

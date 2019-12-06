@@ -3,7 +3,7 @@ import os #운영체제(Operating System)에서 제공하는 기능을 실행
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import LinearSVC
 import operator
 from sklearn.metrics import confusion_matrix, recall_score, accuracy_score, precision_score, fbeta_score
 import pickle
@@ -26,7 +26,7 @@ train_y = features.loc[pd.to_datetime(features['datetime']) < train_date, 'failu
 train_X = pd.get_dummies(features.loc[pd.to_datetime(features['datetime']) < train_date].drop(['datetime','machineID','failure'], 1))
 
 # train and predict using the model, storing results for later
-my_model = RandomForestClassifier(criterion='entropy',n_estimators=10, max_features=2,max_depth=None,random_state=1,n_jobs=-1)
+my_model = LinearSVC()
 my_model.fit(train_X, train_y)  
 # 모델 저장   
-joblib.dump(my_model, 'my_model_RandomForestClassifier.pkl')
+joblib.dump(my_model, 'my_model_LinearSVC.pkl')
