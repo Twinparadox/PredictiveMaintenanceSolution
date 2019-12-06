@@ -1,29 +1,29 @@
-                                        none     comp1     comp2     comp3  \
-accuracy                            0.995865  0.995865  0.995865  0.995865   
-precision                           0.997996  0.762923  0.912042  0.884536   
-recall                              0.998180  0.660494  0.949836  0.905063   
-F1                                  0.998088  0.708023  0.930556  0.894682   
-macro precision                     0.899681  0.899681  0.899681  0.899681   
-macro recall                        0.894381  0.894381  0.894381  0.894381   
-macro F1                            0.896178  0.896178  0.896178  0.896178   
-average accuracy                    0.998346  0.998346  0.998346  0.998346   
-micro-averaged precision/recall/F1  0.995865  0.995865  0.995865  0.995865   
-majority class accuracy             0.981327  0.000000  0.000000  0.000000   
-majority class recall               1.000000  0.000000  0.000000  0.000000   
-majority class precision            0.981327  0.000000  0.000000  0.000000   
-majority class F1                   0.990576  0.000000  0.000000  0.000000   
-expected accuracy                   0.963272  0.963272  0.963272  0.963272   
-kappa                               0.887420  0.887420  0.887420  0.887420   
-random guess accuracy               0.200000  0.200000  0.200000  0.200000   
-random guess precision              0.981327  0.004503  0.006372  0.003294   
-random guess recall                 0.200000  0.200000  0.200000  0.200000   
-random guess F1                     0.332280  0.008808  0.012351  0.006481   
-random weighted guess accuracy      0.963095  0.963095  0.963095  0.963095   
-random weighted guess precision     0.981327  0.004503  0.006372  0.003294   
-random weighted guess recall        0.981327  0.004503  0.006372  0.003294   
-random weighted guess F1            0.981327  0.004503  0.006372  0.003294   
+                                        none     comp1     comp2     comp3     comp4  
+accuracy                            0.995865  0.995865  0.995865  0.995865  0.995865    
+precision                           0.997996  0.762923  0.912042  0.884536  0.940909  
+recall                              0.998180  0.660494  0.949836  0.905063  0.958333   
+F1                                  0.998088  0.708023  0.930556  0.894682  0.949541   
+macro precision                     0.899681  0.899681  0.899681  0.899681  0.899681   
+macro recall                        0.894381  0.894381  0.894381  0.894381  0.894381   
+macro F1                            0.896178  0.896178  0.896178  0.896178  0.896178   
+average accuracy                    0.998346  0.998346  0.998346  0.998346  0.998346   
+micro-averaged precision/recall/F1  0.995865  0.995865  0.995865  0.995865  0.995865   
+majority class accuracy             0.981327  0.000000  0.000000  0.000000  0.000000   
+majority class recall               1.000000  0.000000  0.000000  0.000000  0.000000   
+majority class precision            0.981327  0.000000  0.000000  0.000000  0.000000   
+majority class F1                   0.990576  0.000000  0.000000  0.000000  0.000000   
+expected accuracy                   0.963272  0.963272  0.963272  0.963272  0.963272   
+kappa                               0.887420  0.887420  0.887420  0.887420  0.887420   
+random guess accuracy               0.200000  0.200000  0.200000  0.200000  0.200000   
+random guess precision              0.981327  0.004503  0.006372  0.003294  0.004503   
+random guess recall                 0.200000  0.200000  0.200000  0.200000  0.200000   
+random guess F1                     0.332280  0.008808  0.012351  0.006481  0.008808   
+random weighted guess accuracy      0.963095  0.963095  0.963095  0.963095  0.963095   
+random weighted guess precision     0.981327  0.004503  0.006372  0.003294  0.004503   
+random weighted guess recall        0.981327  0.004503  0.006372  0.003294  0.004503   
+random weighted guess F1            0.981327  0.004503  0.006372  0.003294  0.004503   
 
-                                       comp4  
+                                       comp4
 accuracy                            0.995865  
 precision                           0.940909  
 recall                              0.958333  

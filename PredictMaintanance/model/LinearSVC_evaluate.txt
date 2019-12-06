@@ -1,44 +1,44 @@
                                         none     comp1     comp2     comp3     comp4
-accuracy                            0.982648  0.982648  0.982648  0.982648  0.982648   
-precision                           0.982775  0.000000  0.984694  0.000000  0.000000   
-recall                              0.999979  0.000000  0.210469  0.000000  0.000000   
-F1                                  0.991302       NaN  0.346810       NaN        NaN   
-macro precision                     0.393494  0.393494  0.393494  0.393494  0.393494   
-macro recall                        0.242090  0.242090  0.242090  0.242090  0.242090   
-macro F1                                 NaN       NaN       NaN       NaN       NaN   
-average accuracy                    0.993059  0.993059  0.993059  0.993059  0.993059   
-micro-averaged precision/recall/F1  0.982648  0.982648  0.982648  0.982648  0.982648   
+accuracy                            0.992120  0.992120  0.992120  0.992120  0.992120   
+precision                           0.994337  0.830645  0.832386  0.838264  0.880282   
+recall                              0.998378  0.158951  0.958561  0.896624  0.578704   
+F1                                  0.996353  0.266839  0.891029  0.866463  0.698324   
+macro precision                     0.875183  0.875183  0.875183  0.875183  0.875183   
+macro recall                        0.718244  0.718244  0.718244  0.718244  0.718244   
+macro F1                            0.743802  0.743802  0.743802  0.743802  0.743802   
+average accuracy                    0.996848  0.996848  0.996848  0.996848  0.996848   
+micro-averaged precision/recall/F1  0.992120  0.992120  0.992120  0.992120  0.992120   
 majority class accuracy             0.981327  0.000000  0.000000  0.000000  0.000000   
 majority class recall               1.000000  0.000000  0.000000  0.000000  0.000000   
 majority class precision            0.981327  0.000000  0.000000  0.000000  0.000000   
 majority class F1                   0.990576  0.000000  0.000000  0.000000  0.000000   
-expected accuracy                   0.979870  0.979870  0.979870  0.979870  0.979870   
-kappa                               0.137977  0.137977  0.137977  0.137977  0.137977   
+expected accuracy                   0.966993  0.966993  0.966993  0.966993  0.966993   
+kappa                               0.761246  0.761246  0.761246  0.761246  0.761246   
 random guess accuracy               0.200000  0.200000  0.200000  0.200000  0.200000   
 random guess precision              0.981327  0.004503  0.006372  0.003294  0.004503   
 random guess recall                 0.200000  0.200000  0.200000  0.200000  0.200000   
 random guess F1                     0.332280  0.008808  0.012351  0.006481  0.008808   
-random weighted guess accuracy      0.963095  0.963095  0.963095  0.963095  0.963095   
+random weighted guess accuracy      0.963095  0.963095  0.963095  0.963095  0.963095    
 random weighted guess precision     0.981327  0.004503  0.006372  0.003294  0.004503   
 random weighted guess recall        0.981327  0.004503  0.006372  0.003294  0.004503   
 random weighted guess F1            0.981327  0.004503  0.006372  0.003294  0.004503   
 
                                        comp4  
-accuracy                            0.982648  
-precision                           0.000000  
-recall                              0.000000  
-F1                                       NaN  
-macro precision                     0.393494  
-macro recall                        0.242090  
-macro F1                                 NaN  
-average accuracy                    0.993059  
-micro-averaged precision/recall/F1  0.982648  
+accuracy                            0.992120  
+precision                           0.880282  
+recall                              0.578704  
+F1                                  0.698324  
+macro precision                     0.875183  
+macro recall                        0.718244  
+macro F1                            0.743802  
+average accuracy                    0.996848  
+micro-averaged precision/recall/F1  0.992120  
 majority class accuracy             0.000000  
 majority class recall               0.000000  
 majority class precision            0.000000  
 majority class F1                   0.000000  
-expected accuracy                   0.979870  
-kappa                               0.137977  
+expected accuracy                   0.966993  
+kappa                               0.761246  
 random guess accuracy               0.200000  
 random guess precision              0.004503  
 random guess recall                 0.200000  
