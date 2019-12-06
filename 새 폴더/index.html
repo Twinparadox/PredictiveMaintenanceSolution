@@ -26,7 +26,7 @@
   <link href="css/heroic-features.css" rel="stylesheet">
 </head>
 
-  <body>
+<body>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
@@ -106,37 +106,8 @@
       <div class="col-12">
         Error Log
       </div>
-      <div class="col-12">
-          <table class="table">
-              <thead class="thead-dark">
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
-                  <th scope="col">Handle</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
+      <div class="row">
+        
       </div>
     </div>    
   </div>
@@ -154,104 +125,172 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script>
-  var sensorData = {{sensor|tojson}};
-
-  function flatten(arr) {
-    return [].concat.apply([], arr);
-  }
-			
-  var voltChart = bb.generate({
+  var chart = bb.generate({
     data: {
-      json: flatten(sensorData),
-      keys: {
-        value: ["volt"],
-        x: "datetime"
-      },
-      xFormat: "%Y-%m-%d %H:%M:%S"
+      x: "x",
+      columns: [
+    ["x", "2012-12-29", "2012-12-30", "2012-12-31"],
+    ["data1", 230, 300, 330],
+    ["data2", 190, 230, 200],
+    ["data3", 90, 130, 180]
+      ]
     },
     axis: {
       x: {
         type: "timeseries",
         tick: {
-          format: "%Y-%m-%d %H:%M:%S"
+          format: "%m/%d"
         }
       }
     },
-    color: {
-      pattern: ["#1f77b4"]
-    },
-    bindto: '#lineChart1'
+    bindto: "#lineChart1"
   });
-
-  var rotateChart = bb.generate({
-    data: {
-      json: flatten(sensorData),
-      keys: {
-        value: ["rotate"],
-        x: "datetime"
+  setTimeout(function() {
+    chart.flow({
+      columns: [
+        ["x", '2013-01-11', '2013-01-21'],
+        ["data1", 500, 200],
+        ["data2", 100, 300],
+        ["data3", 200, 120]
+      ],
+      duration: 1500,
+      done: function() {
+        chart.flow({
+          columns: [
+  ["x", '2013-02-11', '2013-02-12', '2013-02-13', '2013-02-14'],
+  ["data1", 200, 300, 100, 250],
+  ["data2", 100, 90, 40, 120],
+  ["data3", 100, 100, 300, 500]
+          ],
+          length: 0,
+          duration: 1500,
+          done: function() {
+  chart.flow({
+      columns: [
+          ["x", '2013-03-01', '2013-03-02'],
+          ["data1", 200, 300],
+          ["data2", 150, 250],
+          ["data3", 100, 100]
+      ],
+      length: 2,
+      duration: 1500,
+      done: function() {
+          chart.flow({
+    columns: [
+        ["x", '2013-03-21', '2013-04-01'],
+        ["data1", 500, 200],
+        ["data2", 100, 150],
+        ["data3", 200, 400]
+    ],
+    to: '2013-03-01',
+    duration: 1500
+          });
+      }
+  });
+            }
+        });
       },
-      xFormat: "%Y-%m-%d %H:%M:%S"
-    },
-    axis: {
-      x: {
-        type: "timeseries",
-        tick: {
-          format: "%Y-%m-%d %H:%M:%S"
-        }
-      }
-    },
-    color: {
-      pattern: ["#ffbb78"]
-    },
-    bindto: '#lineChart2'
-  });
+    });
+  }, 1000);
+
   
-  var pressureChart = bb.generate({
+  var chart2 = bb.generate({
     data: {
-      json: flatten(sensorData),
-      keys: {
-        value: ["pressure"],
-        x: "datetime"
-      },
-      xFormat: "%Y-%m-%d %H:%M:%S"
+      columns: [
+    ["data1", 30, 200, 100, 400, 150, 250],
+    ["data2", 50, 20, 10, 40, 15, 25]
+      ]
     },
-    axis: {
-      x: {
-        type: "timeseries",
-        tick: {
-          format: "%Y-%m-%d %H:%M:%S"
-        }
-      }
-    },
-    color: {
-      pattern: ["#d62728"]
-    },
-    bindto: '#lineChart3'
-  });
-  
-  var vibrationChart = bb.generate({
-    data: {
-      json: flatten(sensorData),
-      keys: {
-        value: ["vibration"],
-        x: "datetime"
-      },
-      xFormat: "%Y-%m-%d %H:%M:%S"
-    },
-    axis: {
-      x: {
-        type: "timeseries",
-        tick: {
-          format: "%Y-%m-%d %H:%M:%S"
-        }
-      }
-    },
-    color: {
-      pattern: ["#bcbd22"]
-    },
-    bindto: '#lineChart4'
+    bindto: "#lineChart2"
   });
 
+  setTimeout(function() {
+    chart.load({
+      columns: [
+        ["data1", 230, 190, 300, 500, 300, 400]
+      ]
+    });
+  }, 1000);
+
+  setTimeout(function() {
+    chart.load({
+      columns: [
+        ["data3", 130, 150, 200, 300, 200, 100]
+      ]
+    });
+  }, 1500);
+
+  setTimeout(function() {
+    chart.unload({
+      ids: "data1"
+    });
+  }, 2000);
+
+  
+  var chart3 = bb.generate({
+    data: {
+      columns: [
+    ["data1", 30, 200, 100, 400, 150, 250],
+    ["data2", 50, 20, 10, 40, 15, 25]
+      ]
+    },
+    bindto: "#lineChart3"
+  });
+
+  setTimeout(function() {
+    chart.load({
+      columns: [
+        ["data1", 230, 190, 300, 500, 300, 400]
+      ]
+    });
+  }, 1000);
+
+  setTimeout(function() {
+    chart.load({
+      columns: [
+        ["data3", 130, 150, 200, 300, 200, 100]
+      ]
+    });
+  }, 1500);
+
+  setTimeout(function() {
+    chart.unload({
+      ids: "data1"
+    });
+  }, 2000);
+
+  
+  var chart4 = bb.generate({
+    data: {
+      columns: [
+    ["data1", 30, 200, 100, 400, 150, 250],
+    ["data2", 50, 20, 10, 40, 15, 25]
+      ]
+    },
+    bindto: "#lineChart4"
+  });
+
+  setTimeout(function() {
+    chart.load({
+      columns: [
+        ["data1", 230, 190, 300, 500, 300, 400]
+      ]
+    });
+  }, 1000);
+
+  setTimeout(function() {
+    chart.load({
+      columns: [
+        ["data3", 130, 150, 200, 300, 200, 100]
+      ]
+    });
+  }, 1500);
+
+  setTimeout(function() {
+    chart.unload({
+      ids: "data1"
+    });
+  }, 2000);
 </script>
 </body>
 

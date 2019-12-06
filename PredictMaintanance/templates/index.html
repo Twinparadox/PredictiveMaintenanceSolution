@@ -11,19 +11,19 @@
 
   <script src="https://d3js.org/d3.v4.min.js"></script>
   
-  <!--
+
   <link rel="stylesheet" href=" {{ url_for('static', filename='billboard.css') }} ">
   <script src =" {{ url_for('static', filename='billboard.js') }} "></script>
-  -->
-
-  <link rel="stylesheet" href="css/billboard.css">
-  <script src="js/billboard.js"></script>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+  <link rel="stylesheet" href=" {{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}">
+	
   <!-- Custom styles for this template -->
-  <link href="css/heroic-features.css" rel="stylesheet">
+  <link rel="stylesheet" href=" {{ url_for('static', filename='css/heroic-features.css') }}">
+  
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </head>
 
   <body>
@@ -57,6 +57,8 @@
 
   <!-- Page Content -->
   <div class="container-fluid">
+    <button id="refreshButton" class="button">가져오기</button>
+    Data : {{update}}
     <div class="page-header my-4">
       <h1>기기명 <small>모델 종류</small></h1>
     </div>
@@ -149,11 +151,14 @@
     </div>
     <!-- /.container -->
   </footer>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script>
+  $("#refreshButton").click(function() {
+    $.ajax({
+      type: "POST",
+      url: "/draw"
+    });
+  });
+
   var sensorData = {{sensor|tojson}};
 
   function flatten(arr) {
@@ -251,7 +256,7 @@
     },
     bindto: '#lineChart4'
   });
-
+  
 </script>
 </body>
 
