@@ -26,7 +26,7 @@ for machineID in machine_list:
 
 for file in machineID_list:
     filename = file
-    csvfile = open('telemetry/' + filename + '.csv', 'r')
+    csvfile = open('telemetry_labeled_errors/' + filename + '.csv', 'r')
     jsonfile = open('telemetry_labeled_errors_json/' + filename + '.json', 'w')
     
     fieldnames = ("datetime","machineID","volt","rotate","pressure", "vibration","errorID")
