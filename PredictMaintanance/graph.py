@@ -8,7 +8,9 @@ import csv
 import os #운영체제(Operating System)에서 제공하는 기능을 실행
 import pandas as pd
 
-i = 0
+period_start = 0
+period_cnt = 25
+i = 25
 data = []
 value  = []
 with open('data/testData/model1/telemetry_json/machineID13.json') as f:
@@ -19,23 +21,37 @@ with open('data/testData/model1/telemetry_json/machineID13.json') as f:
 app = Flask(__name__)
 
 @app.route('/')
-
-
-@app.route('/graph')
-def graph():
-    return render_template('index.html', update = "None", sensor = "")
+def index():
+    value = data[1:25]
+    return render_template('index.html', initdata=value)
 
 @app.route('/draw', methods = ['POST', 'GET'])
-def draw():
+def draw():    
     global i
+    global period_start
     global value
     
     i = i + 1
+    period_start += 1
     
     value.append(data[i])
-    print(value)
+    print(data[i])
     
-    return render_template('index.html', update = data[i], sensor = value)
+    return json.dumps([data[i]])
+
+@app.route('/graph')
+def graph():
+    global i
+    global period_start
+    global value
+    
+    i = i + 1
+    period_start += 1
+    
+    value.append(data[i])
+    return render_template('graph.html', update = data[i], sensor = value)
+    
+#    return render_template('index.html', update = data[i], sensor = value)
 
 if __name__ == '__main__':
     # Flask 서비스 스타트
