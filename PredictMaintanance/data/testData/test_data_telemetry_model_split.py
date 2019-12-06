@@ -15,7 +15,7 @@ for machineID in machine_list:
 
 
 # datasets/features.csv 파일경로
-data_path = os.path.join("test_data_telemetry.csv") 
+data_path = os.path.join("test_data_telemetry_errors.csv") 
 # features.csv파일 읽어오기
 data = pd.read_csv(data_path)
 
@@ -23,7 +23,7 @@ data = pd.read_csv(data_path)
 for num in machineID_list:
     machine = data[data['machineID']==num]
     filename = 'machineID' + str(num) + '.csv'
-    filepath = model_num + '/telemetry/'
+    filepath = model_num + '/telemetry_labeled_errors/'
     machine.to_csv(filepath+filename, index=False )
 
 
