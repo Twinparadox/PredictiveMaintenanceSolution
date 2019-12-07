@@ -17,16 +17,14 @@
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href=" {{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href=" {{ url_for('static', filename='css/addons/datatables.min.css') }}">
-  
+
   <!-- Custom styles for this template -->
   <link rel="stylesheet" href=" {{ url_for('static', filename='css/heroic-features.css') }}">
 
   <!-- Bootstrap core JavaScript -->
   <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/addons/datatables.min.js') }}"></script>
-</head>
+  </head>
 
   <body>
   <!-- Navigation -->
@@ -36,24 +34,29 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
+      <!-- Toggler/collapsibe Button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar links -
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/?machine=0">Machine13-model1</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="/?machine=2">Machine11-model2</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
+            <a class="nav-link" href="/?machine=4">Machine1-model3</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link" href="/?machine=6">Machine2-model4</a>
           </li>
         </ul>
       </div>
+    -->
     </div>
   </nav>
 
@@ -66,9 +69,6 @@
           <div id='alert' class="mx-auto bg-success rounded-circle" style="width:200px; height:200px;">
           </div>
           <div class="row">
-            <div class="col-12">
-              Error Log
-            </div>
             <div class="col-12">
               <div class="card-header">
                 Comp1
@@ -105,7 +105,7 @@
               </div>
               <div class="card-body">
                 <div class="progress">
-                  <div id="comp3" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div id="comp4" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div>         
             </div>
@@ -114,9 +114,6 @@
         </div>
       <div class="col-10"><!-- Jumbotron Header -->
         <div class="row">
-          <div class="col-12">
-            Sensor
-          </div>
           <div class="col-6 mb-3">
             <div class="card">            
                 <div class="card-header">Voltage</div>
@@ -156,17 +153,17 @@
       </div>
       <div class="row">
         <div class="col-12">
-            <table id="log" class="table table-bordered table-sm" cellspacing="0" width="100%">
-                <thead>
-                  <tr>
-                    <th class="th-sm" scope="col">E/F</th>
-                    <th class="th-sm" scope="col">Sub</th>
-                    <th class="th-sm" scope="col">Datetime</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+          <table id="log" class="table table-fixed">
+              <thead>
+                <tr>
+                  <th class="col-xs">E/F</th>
+                  <th class="col-xs">Sub</th>
+                  <th class="col-xs">Datetime</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+          </table>
         </div>
       </div>      
     </div>
@@ -186,7 +183,7 @@
     "scrollY": "200px",
     "scrollCollapse": true,
     });
-    $('.dataTables_length').addClass('bs-select');
+    $('.dataTables_length').addClass('bs-select');    
   });
 
   sensorData = {{initdata|tojson}}
@@ -308,8 +305,6 @@
     }
   }
 
-  
-
   setInterval(function () {
     $.ajax({
       type: "POST",
@@ -319,11 +314,11 @@
         appendTable(data);
         updateAlert(data);
         drawStatus(data);
+        drawProgress();
       }
     });
   }, 1000);
 
-    
   function drawChart(data)
   {
     function flatten(arr) {
@@ -375,7 +370,7 @@
     {
       if(item["errorID"] != "none")
       {
-        $('#log > tbody:last').append('<tr><td>error</td><td>'+item["errorID"]+'</td><td>'+item["datetime"]+'</td>');
+        $('#log > tbody:last').append('<tr><td class="col-xs">error</td><td class="col-xs">'+item["errorID"]+'</td><td class="col-xs">'+item["datetime"]+'</td>');
         if(flag==false)
         {
           tIdx++;
@@ -388,7 +383,7 @@
         if(cnt_failure==0)
         {
           tIdx++;
-          $('#log > tbody:last').append('<tr class="bg-danger"><td>failure</td><td>'+item["failure"]+'</td><td>'+item["datetime"]+'</td>');
+          $('#log > tbody:last').append('<tr class="bg-danger"><td class="col-xs">failure</td><td class="col-xs">'+item["failure"]+'</td><td class="col-xs">'+item["datetime"]+'</td>');
         }
         cnt_failure++;
       }
@@ -408,13 +403,13 @@
           $('#alert').toggleClass("bg-warning",true);
           $('#alert').toggleClass("bg-danger",false);   
           cnt++;  
-          cnt_failure=0;
         }
         else
         {
           $('#alert').toggleClass("bg-success",true);
           $('#alert').toggleClass("bg-warning",false);
           $('#alert').toggleClass("bg-danger",false);
+          cnt_failure=0;
         }
         if(cnt >= 23)
         { 
@@ -434,7 +429,6 @@
           {
             cnt = 0;
             flag=false;
-            cnt_failure=0;
           }
         }  
       }
@@ -454,6 +448,11 @@
       var compArray = [comp1, comp2, comp3, comp4];
       var max = Math.max.apply(null, compArray);
 
+      origin_comp1 = comp1;
+      origin_comp2 = comp2;
+      origin_comp3 = comp3;
+      origin_comp4 = comp4;
+
       comp1 = comp1/max * 100;
       comp2 = comp2/max * 100;
       comp3 = comp3/max * 100;
@@ -463,6 +462,50 @@
       $('#comp2').css('width', comp2+'%').attr('aria-valuenow', comp2);
       $('#comp3').css('width', comp3+'%').attr('aria-valuenow', comp3);
       $('#comp4').css('width', comp4+'%').attr('aria-valuenow', comp4);
+    }
+  }
+
+  function drawProgress()
+  {
+    var comp1 = $('#comp1').attr('aria-valuenow');
+    var comp2 = $('#comp2').attr('aria-valuenow');
+    var comp3 = $('#comp3').attr('aria-valuenow');
+    var comp4 = $('#comp4').attr('aria-valuenow');
+
+    if(comp1 >= 75) {
+      $('#comp1').toggleClass("bg-danger", true);
+      $('#comp1').toggleClass("bg-success", false);
+    }
+    else {
+      $('#comp1').toggleClass("bg-danger",false);
+      $('#comp1').toggleClass("bg-success", true);
+    }
+
+    if(comp2 >= 75) {
+      $('#comp2').toggleClass("bg-danger", true);
+      $('#comp2').toggleClass("bg-success", false);
+    }
+    else {
+      $('#comp2').toggleClass("bg-danger",false);
+      $('#comp2').toggleClass("bg-success", true);
+    }
+
+    if(comp3 >= 75) {
+      $('#comp3').toggleClass("bg-danger", true);
+      $('#comp3').toggleClass("bg-success", false);
+    }
+    else {
+      $('#comp3').toggleClass("bg-danger",false);
+      $('#comp3').toggleClass("bg-success", true);
+    }
+
+    if(comp4 >= 75) {
+      $('#comp4').toggleClass("bg-danger", true);
+      $('#comp4').toggleClass("bg-success", false);
+    }
+    else {
+      $('#comp4').toggleClass("bg-danger",false);
+      $('#comp4').toggleClass("bg-success", true);
     }
   }
   
