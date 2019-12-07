@@ -202,4 +202,4 @@ if __name__ == '__main__':
     # ml/model.py 선 실행 후 생성
     model = joblib.load('./model/my_model.pkl')
     # Flask 서비스 스타트
-    app.run(host='192.168.0.34', port=8080)
+    app.run(host='localhost', port=8080)

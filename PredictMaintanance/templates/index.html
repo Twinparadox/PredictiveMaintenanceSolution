@@ -17,13 +17,15 @@
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href=" {{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}">
-	
+  <link rel="stylesheet" href=" {{ url_for('static', filename='css/addons/datatables.min.css') }}">
+  
   <!-- Custom styles for this template -->
   <link rel="stylesheet" href=" {{ url_for('static', filename='css/heroic-features.css') }}">
-  
+
   <!-- Bootstrap core JavaScript -->
   <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/addons/datatables.min.js') }}"></script>
 </head>
 
   <body>
@@ -57,91 +59,117 @@
 
   <!-- Page Content -->
   <div class="container-fluid">
-    <button id="refreshButton" class="button">가져오기</button>
-    Data : {{update}}
-    <div class="page-header my-4">
-      <h1>기기명 <small>모델 종류</small></h1>
-    </div>
-
-
-    <!-- Jumbotron Header -->
     <div class="row">
-      <div class="col-12">
-        Sensor
-      </div>
-      <div class="col-6 mb-3">
-        <div class="card">            
-            <div class="card-header">Voltage</div>
-            <div class="card-body">              
-              <div id="lineChart1"></div>
+      <div class="col-2">
+        <div class="page-header my-4">
+          <h1>M-13<small>model1</small></h1>
+          <div id='alert' class="mx-auto bg-success rounded-circle" style="width:200px; height:200px;">
+          </div>
+          <div class="row">
+            <div class="col-12">
+              Error Log
             </div>
-        </div>
-      </div>
-      <div class="col-6 mb-3">
-        <div class="card">
-          <div class="card-header">Pressure</div>
-          <div class="card-body">              
-            <div id="lineChart2"></div>
+            <div class="col-12">
+              <div class="card-header">
+                Comp1
+              </div>
+              <div class="card-body">              
+                <div class="progress">
+                  <div id="comp1" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card-header">
+                Comp2
+              </div>
+              <div class="card-body">
+                <div class="progress">
+                  <div id="comp2" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card-header">
+                Comp3
+              </div>
+              <div class="card-body">
+                <div class="progress">
+                  <div id="comp3" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>    
+            </div>
+            <div class="col-12">
+              <div class="card-header">
+                Comp4
+              </div>
+              <div class="card-body">
+                <div class="progress">
+                  <div id="comp3" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>         
+            </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-6 mb-3">
-          <div class="card">            
-            <div class="card-header">Lorem Ipsum</div>
-            <div class="card-body">              
-              <div id="lineChart3"></div>
+      <div class="col-10"><!-- Jumbotron Header -->
+        <div class="row">
+          <div class="col-12">
+            Sensor
+          </div>
+          <div class="col-6 mb-3">
+            <div class="card">            
+                <div class="card-header">Voltage</div>
+                <div class="card-body">              
+                  <div id="lineChart1"></div>
+                </div>
             </div>
           </div>
-      </div>
-      <div class="col-6 mb-3">
-          <div class="card">
-            <div class="card-header">Lorem Ipsum</div>
-            <div class="card-body">              
-              <div id="lineChart4"></div>
+          <div class="col-6 mb-3">
+            <div class="card">
+              <div class="card-header">Rotate</div>
+              <div class="card-body">              
+                <div id="lineChart2"></div>
+              </div>
             </div>
           </div>
+        </div>
+        <div class="row">
+          <div class="col-6 mb-3">
+              <div class="card">            
+                <div class="card-header">Pressure</div>
+                <div class="card-body">              
+                  <div id="lineChart3"></div>
+                </div>
+              </div>
+          </div>
+          <div class="col-6 mb-3">
+              <div class="card">
+                <div class="card-header">Vibration</div>
+                <div class="card-body">              
+                  <div id="lineChart4"></div>
+                </div>
+              </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        Error Log
       </div>
-      <div class="col-12">
-          <table class="table">
-              <thead class="thead-dark">
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
-                  <th scope="col">Handle</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
+      <div class="row">
+        <div class="col-12">
+            <table id="log" class="table table-bordered table-sm" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th class="th-sm" scope="col">E/F</th>
+                    <th class="th-sm" scope="col">Sub</th>
+                    <th class="th-sm" scope="col">Datetime</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
             </table>
-      </div>
-    </div>    
-  </div>
+        </div>
+      </div>      
+    </div>
   <!-- /.container -->
 
   <!-- Footer
@@ -153,7 +181,21 @@
   -->
 
   <script>
+  $(document).ready(function () {
+    $('#log').DataTable({
+    "scrollY": "200px",
+    "scrollCollapse": true,
+    });
+    $('.dataTables_length').addClass('bs-select');
+  });
+
   sensorData = {{initdata|tojson}}
+  tIdx = 1;
+  cnt = 0;
+  cnt_failure = 0;
+  flag = false;
+  flag_failure = false;
+
   var voltChart = bb.generate({
     data: {
       json: sensorData,
@@ -161,12 +203,15 @@
         value: ["volt"],
         x: "datetime"
       },
-      xFormat: "%Y-%m-%d %H:%M:%S"
+      xFormat: "%Y-%m-%d %H:%M:%S",
+      type: "spline"
     },
     axis: {
       x: {
         type: "timeseries",
         tick: {
+          culling: false,
+          count: 7,
           format: "%Y-%m-%d %H:%M:%S"
         }
       }
@@ -184,12 +229,15 @@
         value: ["rotate"],
         x: "datetime"
       },
-      xFormat: "%Y-%m-%d %H:%M:%S"
+      xFormat: "%Y-%m-%d %H:%M:%S",
+      type: "spline"
     },
     axis: {
       x: {
         type: "timeseries",
         tick: {
+          culling: false,
+          count: 7,
           format: "%Y-%m-%d %H:%M:%S"
         }
       }
@@ -207,12 +255,15 @@
         value: ["pressure"],
         x: "datetime"
       },
-      xFormat: "%Y-%m-%d %H:%M:%S"
+      xFormat: "%Y-%m-%d %H:%M:%S",
+      type: "spline"
     },
     axis: {
       x: {
         type: "timeseries",
         tick: {
+          culling: false,
+          count: 7,
           format: "%Y-%m-%d %H:%M:%S"
         }
       }
@@ -230,12 +281,15 @@
         value: ["vibration"],
         x: "datetime"
       },
-      xFormat: "%Y-%m-%d %H:%M:%S"
+      xFormat: "%Y-%m-%d %H:%M:%S",
+      type: "spline"
     },
     axis: {
       x: {
         type: "timeseries",
         tick: {
+          culling: false,
+          count: 7,
           format: "%Y-%m-%d %H:%M:%S"
         }
       }
@@ -245,60 +299,172 @@
     },
     bindto: '#lineChart4'
   });
+  for(var data of sensorData)
+  {
+    if(data["errorID"] != "none")
+    {
+      $('#log > tbody:last').append('<tr><td class="align-middle">error</td><td class="align-middle">'+data["errorID"]+'</td><td class="align-middle">'+data["datetime"]+'</td>');
+      tIdx++;
+    }
+  }
+
+  
 
   setInterval(function () {
     $.ajax({
       type: "POST",
       url: "/draw",
       success: function(data) {
-        drawChart(data)
+        drawChart(data);
+        appendTable(data);
+        updateAlert(data);
+        drawStatus(data);
       }
-    });  
-    function drawChart(data)
-    {
+    });
+  }, 1000);
 
-      function flatten(arr) {
-        return [].concat.apply([], arr);
-      }
-      var data = JSON.parse(data)
-      voltChart.flow({
-        json: flatten(data),
-        keys: {
-          value: ["volt"],
-          x: "datetime"
-        },
-        xFormat: "%Y-%m-%d %H:%M:%S",
-        duration: 500,
-      });
-      rotateChart.flow({
-        json: flatten(data),
-        keys: {
-          value: ["rotate"],
-          x: "datetime"
-        },
-        xFormat: "%Y-%m-%d %H:%M:%S",
-        duration: 500,
-      })
-      pressureChart.flow({
-        json: flatten(data),
-        keys: {
-          value: ["pressure"],
-          x: "datetime"
-        },
-        xFormat: "%Y-%m-%d %H:%M:%S",
-        duration: 500,
-      })
-      vibrationChart.flow({
-        json: flatten(data),
-        keys: {
-          value: ["vibration"],
-          x: "datetime"
-        },
-        xFormat: "%Y-%m-%d %H:%M:%S",
-        duration: 500,
-      })
+    
+  function drawChart(data)
+  {
+    function flatten(arr) {
+      return [].concat.apply([], arr);
     }
-  }, 2000);
+    var data = JSON.parse(data)
+    voltChart.flow({
+      json: flatten(data),
+      keys: {
+        value: ["volt"],
+        x: "datetime"
+      },
+      xFormat: "%Y-%m-%d %H:%M:%S",
+      duration: 500,
+    });
+    rotateChart.flow({
+      json: flatten(data),
+      keys: {
+        value: ["rotate"],
+        x: "datetime"
+      },
+      xFormat: "%Y-%m-%d %H:%M:%S",
+      duration: 500,
+    })
+    pressureChart.flow({
+      json: flatten(data),
+      keys: {
+        value: ["pressure"],
+        x: "datetime"
+      },
+      xFormat: "%Y-%m-%d %H:%M:%S",
+      duration: 500,
+    })
+    vibrationChart.flow({
+      json: flatten(data),
+      keys: {
+        value: ["vibration"],
+        x: "datetime"
+      },
+      xFormat: "%Y-%m-%d %H:%M:%S",
+      duration: 500,
+    })
+  }
+
+  function appendTable(data)
+  {      
+    var data = JSON.parse(data);    
+    for(var item of data)
+    {
+      if(item["errorID"] != "none")
+      {
+        $('#log > tbody:last').append('<tr><td>error</td><td>'+item["errorID"]+'</td><td>'+item["datetime"]+'</td>');
+        if(flag==false)
+        {
+          tIdx++;
+        }
+        cnt = 0;
+        flag=true;
+      }
+      if(item["failure"] != "none")
+      {
+        if(cnt_failure==0)
+        {
+          tIdx++;
+          $('#log > tbody:last').append('<tr class="bg-danger"><td>failure</td><td>'+item["failure"]+'</td><td>'+item["datetime"]+'</td>');
+        }
+        cnt_failure++;
+      }
+    }
+  }
+
+  function updateAlert(data)
+  {
+    var data = JSON.parse(data);
+    for(var item of data)
+    {
+      if(item["failure"] == "none")
+      {
+        if(flag)
+        {
+          $('#alert').toggleClass("bg-success",false);
+          $('#alert').toggleClass("bg-warning",true);
+          $('#alert').toggleClass("bg-danger",false);   
+          cnt++;  
+          cnt_failure=0;
+        }
+        else
+        {
+          $('#alert').toggleClass("bg-success",true);
+          $('#alert').toggleClass("bg-warning",false);
+          $('#alert').toggleClass("bg-danger",false);
+        }
+        if(cnt >= 23)
+        { 
+          cnt = 0;
+          flag=false;
+        }       
+      }
+      else
+      {
+        $('#alert').toggleClass("bg-success",false);
+        $('#alert').toggleClass("bg-warning",false);
+        $('#alert').toggleClass("bg-danger",true);
+        if(flag == true)
+        {
+          cnt++;
+          if(cnt >= 23)
+          {
+            cnt = 0;
+            flag=false;
+            cnt_failure=0;
+          }
+        }  
+      }
+    }
+  }
+
+  function drawStatus(data)
+  {
+    var data = JSON.parse(data);
+    for(var item of data)
+    {
+      var comp1 = item["comp1"];
+      var comp2 = item["comp2"];
+      var comp3 = item["comp3"];
+      var comp4 = item["comp4"];
+
+      var compArray = [comp1, comp2, comp3, comp4];
+      var max = Math.max.apply(null, compArray);
+
+      comp1 = comp1/max * 100;
+      comp2 = comp2/max * 100;
+      comp3 = comp3/max * 100;
+      comp4 = comp4/max * 100;
+      
+      $('#comp1').css('width', comp1+'%').attr('aria-valuenow', comp1);
+      $('#comp2').css('width', comp2+'%').attr('aria-valuenow', comp2);
+      $('#comp3').css('width', comp3+'%').attr('aria-valuenow', comp3);
+      $('#comp4').css('width', comp4+'%').attr('aria-valuenow', comp4);
+    }
+  }
   
 </script>
 </body>
