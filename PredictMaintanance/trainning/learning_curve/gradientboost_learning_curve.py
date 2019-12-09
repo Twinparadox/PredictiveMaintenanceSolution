@@ -59,6 +59,7 @@ scores = cross_val_score(estimator=pipe_lr,
 pipe_lr = Pipeline([('scl', StandardScaler()),
                     ('clf', GradientBoostingClassifier(random_state=42))])
 print(pipe_lr.get_params().keys())
+
 '''
 train_sizes, train_scores, test_scores =\
                 learning_curve(estimator=pipe_lr,
@@ -101,12 +102,13 @@ plt.tight_layout()
 plt.savefig('gradientboost_learning_curve.png', dpi=300)
 plt.show()
 '''
-param_range = [1, 2, 3, 4, 5]
+
+param_range = [100, 200, 300, 400, 500]
 train_scores, test_scores = validation_curve(
                 estimator=pipe_lr, 
                 X=X_train, 
                 y=y_train, 
-                param_name='clf__max_depth', 
+                param_name='clf__n_estimators', 
                 param_range=param_range,
                 cv=5)
 
