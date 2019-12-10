@@ -10,7 +10,7 @@ import pickle
 from sklearn.externals import joblib
 
 # datasets/features.csv 파일경로
-features_path = os.path.join("../data/labeled_features.csv") 
+features_path = os.path.join("../data/labeled_features.csv")
 # features.csv파일 읽어오기
 features = pd.read_csv(features_path)
 
@@ -26,7 +26,7 @@ validation_date = pd.to_datetime('2015-8-01 01:00:00')
 test_result = pd.DataFrame(test_result.loc[pd.to_datetime(features['datetime']) > validation_date])
 validation_data = validation_data.loc[pd.to_datetime(features['datetime']) > validation_date]
 
-my_model = joblib.load('my_model_LinearSVC.pkl')
+my_model = joblib.load('my_model_GradientBoostingClassifier.pkl')
 
 
 
@@ -54,7 +54,7 @@ def Evaluate(predicted, actual, labels):
     # Calculate and display confusion matrix
     cm = confusion_matrix(actual, predicted, labels=labels)
     print('Confusion matrix\n- x-axis is true labels (False, True)\n- y-axis is predicted labels')
-    f = open('RandomForestClassifier_confusion_matrix.txt', 'w')
+    f = open('GradientBoostingClassifier_confusion_matrix.txt', 'w')
     print(cm, file = f)
     f.close()
     '''
@@ -166,7 +166,7 @@ for i, test_result in enumerate(test_results):
                                  labels = ['none', 'comp1', 'comp2', 'comp3', 'comp4'])
     evaluation_results.append(evaluation_result)
     
-f = open('LinearSVC_evaluate.txt','w')
+f = open('GradientBoostingClassifier_evaluate.txt','w')
 pd.set_option('display.max_columns', 100)
 print(evaluation_results[0], file=f)  # show full results for first split only
 f.close()

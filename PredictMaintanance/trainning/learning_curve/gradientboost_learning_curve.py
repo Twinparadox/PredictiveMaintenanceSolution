@@ -138,7 +138,7 @@ plt.fill_between(param_range,
 plt.grid()
 plt.xscale('log')
 plt.legend(loc='lower right')
-plt.xlabel('Parameter max_depth')
+plt.xlabel('Parameter n_estimators')
 plt.ylabel('Accuracy')
 plt.ylim([0.8, 1.0])
 plt.tight_layout()
