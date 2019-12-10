@@ -22,7 +22,7 @@ from sklearn.svm import LinearSVC
 
 
 # datasets/features.csv 파일경로
-features_path = os.path.join("../data/labeled_features.csv") 
+features_path = os.path.join("../../data/labeled_features.csv") 
 # features.csv파일 읽어오기
 features = pd.read_csv(features_path)
 
@@ -41,7 +41,7 @@ y_test = features.loc[pd.to_datetime(features['datetime']) < test_date]
 test_date = pd.to_datetime('2015-8-01 01:00:00')
 y_test = y_test.loc[pd.to_datetime(features['datetime']) > test_date, 'failure']
 X_test = pd.get_dummies(X_test.loc[pd.to_datetime(features['datetime']) > test_date].drop(['datetime','machineID','failure'], 1))
-
+'''
 pipe_lr = Pipeline([('scl', StandardScaler()),
                     ('pca', PCA(n_components=2)),
                     ('clf',  LinearSVC())])
@@ -55,11 +55,11 @@ scores = cross_val_score(estimator=pipe_lr,
                          y=y_train,
                          cv=5,
                          n_jobs=-1)  # no. cpu cores to use. -1 all cores
-
+'''
 pipe_lr = Pipeline([('scl', StandardScaler()),
                     ('clf', LinearSVC())])
 print(pipe_lr.get_params().keys())
-
+'''
 train_sizes, train_scores, test_scores =\
                 learning_curve(estimator=pipe_lr,
                                X=X_train,
@@ -100,7 +100,7 @@ plt.ylim([0.8, 1.0])
 plt.tight_layout()
 plt.savefig('LinearSVC_learning_curve.png', dpi=300)
 plt.show()
-
+'''
 param_range = [0.01, 0.1, 1, 10, 100]
 train_scores, test_scores = validation_curve(
                 estimator=pipe_lr, 
@@ -134,7 +134,6 @@ plt.fill_between(param_range,
                  alpha=0.15, color='green')
 
 plt.grid()
-plt.xscale('log')
 plt.legend(loc='lower right')
 plt.xlabel('Parameter C')
 plt.ylabel('Accuracy')

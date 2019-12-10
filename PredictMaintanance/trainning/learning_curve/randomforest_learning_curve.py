@@ -22,7 +22,7 @@ from sklearn.svm import SVC
 
 
 # datasets/features.csv 파일경로
-features_path = os.path.join("../data/labeled_features.csv") 
+features_path = os.path.join("../../data/labeled_features.csv") 
 # features.csv파일 읽어오기
 features = pd.read_csv(features_path)
 
@@ -42,7 +42,7 @@ test_date = pd.to_datetime('2015-8-01 01:00:00')
 y_test = y_test.loc[pd.to_datetime(features['datetime']) > test_date, 'failure']
 X_test = pd.get_dummies(X_test.loc[pd.to_datetime(features['datetime']) > test_date].drop(['datetime','machineID','failure'], 1))
 
-
+'''
 pipe_lr = Pipeline([('scl', StandardScaler()),
                     ('clf', RandomForestClassifier(criterion='entropy',n_estimators=10, max_features=2,random_state=1,n_jobs=-1))])
 
@@ -55,11 +55,11 @@ scores = cross_val_score(estimator=pipe_lr,
                          y=y_train,
                          cv=5,
                          n_jobs=-1)  # no. cpu cores to use. -1 all cores
-
+'''
 pipe_lr = Pipeline([('scl', StandardScaler()),
                     ('clf', RandomForestClassifier(criterion='entropy',n_estimators=10, max_features=2,random_state=1,n_jobs=-1))])
 print(pipe_lr.get_params().keys())
-
+'''
 train_sizes, train_scores, test_scores =\
                 learning_curve(estimator=pipe_lr,
                                X=X_train,
@@ -100,13 +100,13 @@ plt.ylim([0.9, 1.0])
 plt.tight_layout()
 plt.savefig('svc_learning_curve.png', dpi=300)
 plt.show()
-
-param_range = [1, 2, 3, 4, 5]
+'''
+param_range = [100, 200, 300, 400, 500]
 train_scores, test_scores = validation_curve(
                 estimator=pipe_lr, 
                 X=X_train, 
                 y=y_train, 
-                param_name='clf__max_depth', 
+                param_name='clf__n_estimators', 
                 param_range=param_range,
                 cv=5)
 
@@ -134,13 +134,12 @@ plt.fill_between(param_range,
                  alpha=0.15, color='green')
 
 plt.grid()
-plt.xscale('log')
 plt.legend(loc='lower right')
-plt.xlabel('Parameter max_depth')
+plt.xlabel('Parameter n_estimators')
 plt.ylabel('Accuracy')
 plt.ylim([0.9, 1.0])
 plt.tight_layout()
-plt.savefig('svc_validation_curve.png', dpi=300)
+plt.savefig('RandomForestClassifier_validation_curve.png', dpi=300)
 plt.show()
 
 

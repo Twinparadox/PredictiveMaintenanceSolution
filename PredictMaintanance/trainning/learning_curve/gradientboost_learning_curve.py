@@ -136,7 +136,6 @@ plt.fill_between(param_range,
                  alpha=0.15, color='green')
 
 plt.grid()
-plt.xscale('log')
 plt.legend(loc='lower right')
 plt.xlabel('Parameter n_estimators')
 plt.ylabel('Accuracy')
