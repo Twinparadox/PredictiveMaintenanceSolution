@@ -402,35 +402,22 @@
           $('#alert').toggleClass("bg-success",false);
           $('#alert').toggleClass("bg-warning",true);
           $('#alert').toggleClass("bg-danger",false);   
-          cnt++;  
+          flag = false;
         }
         else
         {
           $('#alert').toggleClass("bg-success",true);
           $('#alert').toggleClass("bg-warning",false);
           $('#alert').toggleClass("bg-danger",false);
-          cnt_failure=0;
+          flag = false;
         }
-        if(cnt >= 23)
-        { 
-          cnt = 0;
-          flag=false;
-        }       
       }
       else
       {
         $('#alert').toggleClass("bg-success",false);
         $('#alert').toggleClass("bg-warning",false);
         $('#alert').toggleClass("bg-danger",true);
-        if(flag == true)
-        {
-          cnt++;
-          if(cnt >= 23)
-          {
-            cnt = 0;
-            flag=false;
-          }
-        }  
+        flag = false; 
       }
     }
   }
