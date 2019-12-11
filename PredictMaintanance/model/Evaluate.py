@@ -26,7 +26,7 @@ validation_date = pd.to_datetime('2015-8-01 01:00:00')
 test_result = pd.DataFrame(test_result.loc[pd.to_datetime(features['datetime']) > validation_date])
 validation_data = validation_data.loc[pd.to_datetime(features['datetime']) > validation_date]
 
-my_model = joblib.load('my_model_GradientBoosting.pkl')
+my_model = joblib.load('my_model_RandomForestClassifier2.pkl')
 
 test_result['predicted_failure'] = my_model.predict(validation_data)
 test_results.append(test_result)

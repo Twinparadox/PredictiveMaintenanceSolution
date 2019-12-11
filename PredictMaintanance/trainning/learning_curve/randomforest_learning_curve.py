@@ -57,7 +57,7 @@ scores = cross_val_score(estimator=pipe_lr,
                          n_jobs=-1)  # no. cpu cores to use. -1 all cores
 '''
 pipe_lr = Pipeline([('scl', StandardScaler()),
-                    ('clf', RandomForestClassifier(criterion='entropy',n_estimators=10, max_features=2,random_state=1,n_jobs=-1))])
+                    ('clf', RandomForestClassifier(criterion='entropy', random_state=1,n_jobs=-1))])
 print(pipe_lr.get_params().keys())
 '''
 train_sizes, train_scores, test_scores =\

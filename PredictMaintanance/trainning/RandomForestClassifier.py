@@ -26,7 +26,7 @@ train_y = features.loc[pd.to_datetime(features['datetime']) < train_date, 'failu
 train_X = pd.get_dummies(features.loc[pd.to_datetime(features['datetime']) < train_date].drop(['datetime','machineID','failure'], 1))
 
 # train and predict using the model, storing results for later
-my_model = RandomForestClassifier(criterion='entropy',n_estimators=10, max_features=2,max_depth=5,random_state=1,n_jobs=-1)
+my_model = RandomForestClassifier(criterion = 'entropy', n_estimators=10, max_depth=5,random_state=1,n_jobs=-1)
 my_model.fit(train_X, train_y)  
 # 모델 저장   
 joblib.dump(my_model, 'my_model_RandomForestClassifier.pkl')

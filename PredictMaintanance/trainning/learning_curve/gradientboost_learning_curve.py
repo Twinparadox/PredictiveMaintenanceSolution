@@ -103,12 +103,12 @@ plt.savefig('gradientboost_learning_curve.png', dpi=300)
 plt.show()
 '''
 
-param_range = [100, 200, 300, 400, 500]
+param_range = [1, 2, 3, 4, 5]
 train_scores, test_scores = validation_curve(
                 estimator=pipe_lr, 
                 X=X_train, 
                 y=y_train, 
-                param_name='clf__n_estimators', 
+                param_name='clf__max_depth', 
                 param_range=param_range,
                 cv=5)
 
@@ -137,7 +137,7 @@ plt.fill_between(param_range,
 
 plt.grid()
 plt.legend(loc='lower right')
-plt.xlabel('Parameter n_estimators')
+plt.xlabel('Parameter max_depth')
 plt.ylabel('Accuracy')
 plt.ylim([0.8, 1.0])
 plt.tight_layout()
