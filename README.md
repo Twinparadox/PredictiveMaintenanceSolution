@@ -79,6 +79,18 @@ Billboard.js를 활용해 LineChart의 Flow 기능 구현
 - 실시간 센서 데이터 및 시스템 오류(Error) 파악 가능
 - 향후 24시간 이내 기계의 고장(Failure)을 예측
 
+### 동작 사진(정상)
+![Normal](./PdM1.png)
+
+### 동작 사진(고장 발생 예측시)
+![FaultPrediction](./PdM2.png)
+
+### 동작 사진(고장 발생 예측 -> 정상 예측)
+![Fault2Normal](./PdM3.png)
+
+### 동작 사진(시스템 에러 발생 시)
+![SystemError](./PdM4.png)
+
 ---
 
 ## 개선 방안
